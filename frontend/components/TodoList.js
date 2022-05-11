@@ -10,7 +10,7 @@ export default class TodoList extends React.Component {
         <h2>My Todo List</h2>
         {
           this.props.todos.reduce((acc,info)=>{
-            if(this.props.displayCompleted || !info.completed) return acc.concat(
+            if(this.props.toggleDisplayCompleted || !info.completed) return acc.concat(
               <div onClick = {this.props.toggleCompleted(info.id)} key={info.id}>
                 {info.name}{info.completed ? "✔️" : ''} </div>
             )

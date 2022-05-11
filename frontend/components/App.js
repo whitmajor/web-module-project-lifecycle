@@ -32,6 +32,10 @@ class App extends React.Component {
 componentDidMount(){
   this.fetchAllTodos()
 }
+resetForm =()=>{
+  this.setState({...this.state, currentName:""})
+}
+
 
 postTodo = ()=>{
   axios.post(URL,{name: this.state.currentName})
@@ -45,6 +49,10 @@ postTodo = ()=>{
     .catch(err=> {
     this.setState({...this.state, error: err.response.data.message})
 })
+}
+onTodoNameInputChange = evt =>{
+  const {value} = evt.target
+  this.setState({ ...this.state, currentName: value})
 }
 onTodoFormSubmit=evt=>{
   evt.preventDefault()
@@ -71,10 +79,16 @@ toggleDisplayCompleted =()=>{
       <TodoList
       todos = {this.state.todos}
       toggleCompleted = {this.toggleCompleted}
+    displayCompleted ={this.state.displayCompleted}
       />
       <Form
       toggleDisplayCompleted = {this.toggleDisplayCompleted}
       onTodoFormSubmit ={this.onTodoFormSubmit}
+      onTodoNameInputChange = {this.onTodoNameInputChange}
+      todoNameInput = {this.state.currentName}
+      displayCompleted= {this.state.displayCompleted}
+
+     
 
       />
     </div>
